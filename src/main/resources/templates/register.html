@@ -46,6 +46,12 @@
         <h2 class="text-center">Register Form</h2>
       </header>
 
+      <div class="mt-3" th:if="${param.success}">
+        <div class="alert alert-info">
+          You have successfully registered! Now you can <a th:href="@{/login}">Login here</a>
+        </div>
+      </div>
+
       <div class="card-body">
         <form
           method="POST"
