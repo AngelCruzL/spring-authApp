@@ -9,6 +9,7 @@ import dev.angelcruzl.authsystem.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -43,6 +44,25 @@ public class UserServiceImpl implements UserService {
   @Override
   public User findUserByEmail(String email) {
     return userRepository.findByEmail(email);
+  }
+
+  @Override
+  public List<UserDto> findAllUsers() {
+    List<User> users = userRepository.findAll();
+
+    return users.stream()
+        .map(this::mapToUserDto)
+        .collect(Collectors.toList());
+  }
+
+  private UserDto mapToUserDto(User user) {
+    UserDto userDto = new UserDto();
+    String[] str = user.getName().split(" ");
+    userDto.setFirstName(str[0]);
+    userDto.setLastName(str[1]);
+    userDto.setEmail(user.getEmail());
+
+    return userDto;
   }
 
   private Role checkIfRoleExists() {
