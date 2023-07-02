@@ -6,6 +6,7 @@ import dev.angelcruzl.authsystem.entity.User;
 import dev.angelcruzl.authsystem.repository.RoleRepository;
 import dev.angelcruzl.authsystem.repository.UserRepository;
 import dev.angelcruzl.authsystem.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,13 +16,16 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
   private final UserRepository userRepository;
   private final RoleRepository roleRepository;
+  private final PasswordEncoder passwordEncoder;
 
   public UserServiceImpl(
       UserRepository userRepository,
-      RoleRepository roleRepository
+      RoleRepository roleRepository,
+      PasswordEncoder passwordEncoder
   ) {
     this.userRepository = userRepository;
     this.roleRepository = roleRepository;
+    this.passwordEncoder = passwordEncoder;
   }
 
   @Override
@@ -29,8 +33,7 @@ public class UserServiceImpl implements UserService {
     User user = new User();
     user.setName(userDto.getFirstName() + " " + userDto.getLastName());
     user.setEmail(userDto.getEmail());
-    // TODO: Hash password
-    user.setPassword(userDto.getPassword());
+    user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
     Role role = roleRepository.findByName("ROLE_ADMIN");
     if (role == null) {
