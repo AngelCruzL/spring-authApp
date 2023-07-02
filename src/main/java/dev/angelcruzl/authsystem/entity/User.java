@@ -1,4 +1,4 @@
-package entity;
+package dev.angelcruzl.authsystem.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
