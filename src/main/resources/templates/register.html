@@ -69,6 +69,12 @@
               th:field="*{firstName}"
               type="text"
             />
+
+            <p
+              class="text-danger"
+              th:errors="*{firstName}"
+              th:if="${#fields.hasErrors('firstName')}"
+            ></p>
           </div>
 
           <div class="form-group mb-3">
@@ -81,6 +87,12 @@
               th:field="*{lastName}"
               type="text"
             />
+
+            <p
+              class="text-danger"
+              th:errors="*{lastName}"
+              th:if="${#fields.hasErrors('lastName')}"
+            ></p>
           </div>
 
           <div class="form-group mb-3">
@@ -93,6 +105,12 @@
               th:field="*{email}"
               type="email"
             />
+
+            <p
+              class="text-danger"
+              th:errors="*{email}"
+              th:if="${#fields.hasErrors('email')}"
+            ></p>
           </div>
 
           <div class="form-group mb-3">
@@ -105,6 +123,12 @@
               th:field="*{password}"
               type="password"
             />
+
+            <p
+              class="text-danger"
+              th:errors="*{password}"
+              th:if="${#fields.hasErrors('password')}"
+            ></p>
           </div>
 
           <div class="form-group">
